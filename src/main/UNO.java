@@ -1,6 +1,8 @@
 package main;
 
 import game.Game;
+import cards.*;
+import players.*;
 
 public class UNO {
     public static void main(String[] args) {

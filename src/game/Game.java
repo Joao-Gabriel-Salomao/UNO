@@ -4,7 +4,7 @@ import java.util.*;
 import players.Player;
 import cards.Deck;
 
-public class Game {
+public class Game{
     private List<Player> players;
     private Deck deck;
 
