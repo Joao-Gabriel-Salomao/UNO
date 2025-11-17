@@ -22,4 +22,8 @@ public class Deck {
     public Card draw() {
         return cards.pop();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 192160e7516e5ea25a9620a3bffed3879585d63d
