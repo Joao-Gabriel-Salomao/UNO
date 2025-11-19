@@ -1,38 +1,45 @@
-package player;
+package players;
 
-import java.util.*;
 import cards.Card;
-import cards.Deck;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Player {
-    private String name;
-    private List<Card> hand;
+/*
+Tipo: Classe abstrata
+Função: Representar um jogador genérico (base para Humano e IA).
 
-    public Player(String name) {
-        this.name = name;
-        hand = new ArrayList<>();
+✔ O que essa classe faz?
+- Armazena o nome do jogador.
+- Mantém a mão de cartas.
+- Fornece métodos para receber e jogar cartas.
+- Obriga subclasses a implementar escolherCarta().
+*/
+public abstract class Player {
+
+    protected final String nome;
+    protected final List<Card> mao;
+
+    public Player(String nome) {
+        this.nome = nome;
+        this.mao = new ArrayList<>();
     }
 
-    public void draw(Deck deck, int count) {
-        for (int i = 0; i < count; i++) {
-            hand.add(deck.draw());
-        }
+    public void receberCarta(Card card) {
+        mao.add(card);
     }
 
-    public String getName() {
-        return name;
+    public Card jogarCarta(int index) {
+        return mao.remove(index);
     }
 
-    public int getHandSize() {
-        return hand.size();
+    // Jogador escolhe a carta baseado no tipo (humano / IA).
+    public abstract int escolherCarta(Card topoDescarte);
+
+    public String getNome() {
+        return nome;
     }
 
-    @Override
-    public String toString() {
-        return name + " (" + hand.size() + " cartas)";
+    public List<Card> getMao() {
+        return mao;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 192160e7516e5ea25a9620a3bffed3879585d63d
