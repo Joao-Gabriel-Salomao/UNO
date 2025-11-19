@@ -31,4 +31,8 @@ public class Player {
     public String toString() {
         return name + " (" + hand.size() + " cartas)";
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 192160e7516e5ea25a9620a3bffed3879585d63d

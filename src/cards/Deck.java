@@ -60,4 +60,8 @@ public class Deck {
     public int size() { 
         return cards.size(); 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 192160e7516e5ea25a9620a3bffed3879585d63d

@@ -33,4 +33,8 @@ public abstract class Card {
     public String toString() {
         return getDescription();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 192160e7516e5ea25a9620a3bffed3879585d63d
