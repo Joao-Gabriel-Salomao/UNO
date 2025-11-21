@@ -1,40 +1,31 @@
-/*Tipo: Classe abstrata
-Função: Representar uma carta genérica de UNO, usada como base para todas as outras cartas.
-✔ O que essa classe faz?
-
-Define o atributo color (cor da carta).
-
-Fornece getters e setters para encapsulamento.
-
-Obriga todas as subclasses a implementar o método: */
-
-
 package cards;
 
-public abstract class Card {
-    private String color;
+import java.io.Serializable;
+
+public abstract class Card implements Serializable {
+    protected String color; // "Vermelho","Azul","Verde","Amarelo" or "Preta" for wilds
 
     public Card(String color) {
         this.color = color;
     }
 
-    public String getColor() {
-        return color;
-    }
+    public String getColor() { return color; }
+    public void setColor(String color) { this.color = color; }
 
-    public void setColor(String color) { 
-        this.color = color; 
-    }
+    public abstract String getValue(); // number or action string
 
-    // Polimorfismo: cada tipo de carta tem sua própria descrição
-    public abstract String getDescription();
+    public boolean isPlayableOn(Card top) {
+        if (top == null) return true;
+        if (this.color != null && this.color.equalsIgnoreCase("Preta")) return true;
+        if (this.color != null && top.color != null && this.color.equalsIgnoreCase(top.color)) return true;
+        if (this.getValue() != null && this.getValue().equalsIgnoreCase(top.getValue())) return true;
+        return false;
+    }
 
     @Override
     public String toString() {
-        return getDescription();
+        if (color == null) return getValue();
+        if (color.equalsIgnoreCase("Preta")) return getValue();
+        return color + " " + getValue();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 192160e7516e5ea25a9620a3bffed3879585d63d

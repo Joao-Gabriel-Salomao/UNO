@@ -1,67 +1,68 @@
-/*5) Deck.java
-Tipo: Classe de gerenciamento
-Função: Criar e controlar o baralho completo do UNO (108 cartas). */
-
-
-
 package cards;
 
 import java.util.*;
+import java.io.Serializable;
 
-public class Deck {
-    private Stack<Card> cards;
+public class Deck implements Serializable {
+    private Stack<Card> drawPile;
+    private Stack<Card> discardPile;
 
     public Deck() {
-        cards = new Stack<>();
+        drawPile = new Stack<>();
+        discardPile = new Stack<>();
         createFullUnoDeck();
         shuffle();
     }
 
     private void createFullUnoDeck() {
-        String[] colors = {"Vermelho", "Azul", "Verde", "Amarelo"};
-
-        // NUMÉRICAS
+        String[] colors = {"Vermelho","Azul","Verde","Amarelo"};
         for (String c : colors) {
-            cards.add(new NormalCard(c, 0));
+            drawPile.add(new NormalCard(c,0));
             for (int i = 1; i <= 9; i++) {
-                cards.add(new NormalCard(c, i));
-                cards.add(new NormalCard(c, i)); 
+                drawPile.add(new NormalCard(c,i));
+                drawPile.add(new NormalCard(c,i));
             }
         }
-
-        // CARTAS DE AÇÃO
-        String[] actions = {"Skip", "Reverse", "+2"};
+        String[] actions = {"Skip","Reverse","+2"};
         for (String c : colors) {
             for (String a : actions) {
-                cards.add(new ActionCard(c, a));
-                cards.add(new ActionCard(c, a));
+                drawPile.add(new ActionCard(c,a));
+                drawPile.add(new ActionCard(c,a));
             }
         }
-
-        // CORINGAS
         for (int i = 0; i < 4; i++) {
-            cards.add(new WildCard("Wild"));
-            cards.add(new WildCard("+4"));
+            drawPile.add(new WildCard("Wild"));
+            drawPile.add(new WildCard("+4"));
         }
     }
 
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(drawPile);
     }
 
-    public Card draw() { 
-        return cards.isEmpty() ? null : cards.pop(); 
+    public Card draw() {
+        if (drawPile.isEmpty()) refillFromDiscard();
+        return drawPile.isEmpty() ? null : drawPile.pop();
     }
 
-    public boolean isEmpty() { 
-        return cards.isEmpty(); 
+    public void discard(Card c) {
+        if (c != null) discardPile.push(c);
     }
 
-    public int size() { 
-        return cards.size(); 
+    public Card topDiscard() {
+        return discardPile.isEmpty() ? null : discardPile.peek();
     }
-<<<<<<< HEAD
+
+    private void refillFromDiscard() {
+        if (discardPile.isEmpty()) return;
+        Card top = discardPile.pop();
+        List<Card> rest = new ArrayList<>(discardPile);
+        discardPile.clear();
+        Collections.shuffle(rest);
+        drawPile.addAll(rest);
+        discardPile.push(top);
+    }
+
+    public int drawSize() { return drawPile.size(); }
+    public int discardSize() { return discardPile.size(); }
 }
-=======
-}
->>>>>>> 192160e7516e5ea25a9620a3bffed3879585d63d

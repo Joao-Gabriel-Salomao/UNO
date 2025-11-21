@@ -1,14 +1,3 @@
-/*ActionCard.java
-Tipo: Subclasse de Card
-Função: Representar cartas especiais de ação:
-
-Skip (pula turno)
-
-Reverse (inverte ordem)
-
-+2 (próximo compra duas) */
-
-
 package cards;
 
 public class ActionCard extends Card {
@@ -19,12 +8,8 @@ public class ActionCard extends Card {
         this.action = action;
     }
 
-    public String getAction() {
-        return action;
-    }
-
     @Override
-    public String getDescription() {
-        return getColor() + " " + action;
+    public String getValue() {
+        return action;
     }
 }

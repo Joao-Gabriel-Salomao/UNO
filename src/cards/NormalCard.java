@@ -1,6 +1,3 @@
-/*unção: Representar as cartas numéricas (0 a 9). */
-
-
 package cards;
 
 public class NormalCard extends Card {
@@ -11,12 +8,8 @@ public class NormalCard extends Card {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     @Override
-    public String getDescription() {
-        return getColor() + " " + number;
+    public String getValue() {
+        return String.valueOf(number);
     }
 }
